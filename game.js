@@ -25,22 +25,30 @@ $(document).keypress(function() {
 
 // event handler button press
 $(".btn").click(function() {
-  var userChosenColor = $(this).attr("id");
-  userClickedPattern.push(userChosenColor);
 
-  // play the user chosen color's Audio
-  playSound(userChosenColor);
+  if (!started) {
+    $("#level-title").text("Level " + level);
+    nextSequence();
+    started = true;
+  }
 
-  // animate button press
-  animatePress(userChosenColor);
+  else {
+    var userChosenColor = $(this).attr("id");
+    userClickedPattern.push(userChosenColor);
 
-  // console.log(userClickedPattern);
-  console.log(userClickedPattern);
+    // play the user chosen color's Audio
+    playSound(userChosenColor);
 
-  // check answer after button click
-  checkAnswer(userClickedPattern.length-1);
+    // animate button press
+    animatePress(userChosenColor);
+
+    // console.log(userClickedPattern);
+    console.log(userClickedPattern);
+
+    // check answer after button click
+    checkAnswer(userClickedPattern.length-1);
+  }
 });
-
 
 // button pressed animation function
 function animatePress(currentColor) {
